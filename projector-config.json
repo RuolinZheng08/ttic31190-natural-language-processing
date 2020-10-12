@@ -3,7 +3,7 @@
     {
       "tensorName": "Suffix, IDF vocab_context=5k window=6",
       "tensorShape": [
-        509, 5000
+        40, 5000
       ],
       "tensorPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/suffix-idf-embs-vecs.tsv",
       "metadataPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/suffix-word-embs-meta.tsv"
