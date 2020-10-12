@@ -1,20 +1,36 @@
 {
   "embeddings": [
     {
-      "tensorName": "Word Embeddings: IDF vocab_context=5k window=6",
+      "tensorName": "Suffix, IDF vocab_context=5k window=6",
       "tensorShape": [
         509, 5000
       ],
-      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/idf-embs-vecs.tsv",
-      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/word-embs-meta.tsv"
+      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/suffix-idf-embs-vecs.tsv",
+      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/suffix-word-embs-meta.tsv"
     },
     {
-      "tensorName": "Word Embeddings: PMI vocab_context=5k window=6",
+      "tensorName": "Suffix, PMI vocab_context=5k window=6",
       "tensorShape": [
         509, 5000
       ],
-      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/pmi-embs-vecs.tsv",
-      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/word-embs-meta.tsv"
+      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/suffix-pmi-embs-vecs.tsv",
+      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/suffix-word-embs-meta.tsv"
+    },
+    {
+      "tensorName": "POS, IDF vocab_context=5k window=6",
+      "tensorShape": [
+        509, 5000
+      ],
+      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/pos-idf-embs-vecs.tsv",
+      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/pos-word-embs-meta.tsv"
+    },
+    {
+      "tensorName": "POS, PMI vocab_context=5k window=6",
+      "tensorShape": [
+        509, 5000
+      ],
+      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/pos-pmi-embs-vecs.tsv",
+      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-nlp-word-embeddings/blob/master/pos-word-embs-meta.tsv"
     }
   ]
 }
