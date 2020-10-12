@@ -7,6 +7,30 @@
       ],
       "tensorPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/suffix-idf-embs-vecs.tsv",
       "metadataPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/suffix-word-embs-meta.tsv"
+    },
+    {
+      "tensorName": "Suffix, PMI vocab_context=5k window=6",
+      "tensorShape": [
+        40, 5000
+      ],
+      "tensorPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/suffix-pmi-embs-vecs.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/suffix-word-embs-meta.tsv"
+    },
+    {
+      "tensorName": "POS, IDF vocab_context=5k window=6",
+      "tensorShape": [
+        50, 5000
+      ],
+      "tensorPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/pos-idf-embs-vecs.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/pos-word-embs-meta.tsv"
+    },
+    {
+      "tensorName": "POS, PMI vocab_context=5k window=6",
+      "tensorShape": [
+        50, 5000
+      ],
+      "tensorPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/pos-pmi-embs-vecs.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-nlp-word-embeddings/master/pos-word-embs-meta.tsv"
     }
   ]
 }
