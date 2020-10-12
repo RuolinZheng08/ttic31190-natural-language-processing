@@ -1,0 +1,20 @@
+{
+  "embeddings": [
+    {
+      "tensorName": "Word Embeddings: IDF vocab_context=5k window=6",
+      "tensorShape": [
+        509, 5000
+      ],
+      "tensorPath": "",
+      "metadataPath": ""
+    },
+    {
+      "tensorName": "Word Embeddings: PMI vocab_context=5k window=6",
+      "tensorShape": [
+        509, 5000
+      ],
+      "tensorPath": "",
+      "metadataPath": ""
+    }
+  ]
+}
