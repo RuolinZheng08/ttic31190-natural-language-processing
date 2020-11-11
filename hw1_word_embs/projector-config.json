@@ -5,32 +5,32 @@
       "tensorShape": [
         40, 5000
       ],
-      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-natural-language-processing/blob/master/hw1_word_embs/suffix-idf-embs-vecs.tsv",
-      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-natural-language-processing/blob/master/hw1_word_embs/suffix-word-embs-meta.tsv"
+      "tensorPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-natural-language-processing/master/hw1_word_embs/suffix-idf-embs-vecs.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-natural-language-processing/master/hw1_word_embs/suffix-word-embs-meta.tsv"
     },
     {
       "tensorName": "Suffix, PMI vocab_context=5k window=6",
       "tensorShape": [
         40, 5000
       ],
-      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-natural-language-processing/blob/master/hw1_word_embs/suffix-pmi-embs-vecs.tsv",
-      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-natural-language-processing/blob/master/hw1_word_embs/suffix-word-embs-meta.tsv"
+      "tensorPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-natural-language-processing/master/hw1_word_embs/suffix-pmi-embs-vecs.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-natural-language-processing/master/hw1_word_embs/suffix-word-embs-meta.tsv"
     },
     {
       "tensorName": "POS, IDF vocab_context=5k window=6",
       "tensorShape": [
         50, 5000
       ],
-      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-natural-language-processing/blob/master/hw1_word_embs/pos-idf-embs-vecs.tsv",
-      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-natural-language-processing/blob/master/hw1_word_embs/pos-word-embs-meta.tsv"
+      "tensorPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-natural-language-processing/master/hw1_word_embs/pos-idf-embs-vecs.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-natural-language-processing/master/hw1_word_embs/pos-word-embs-meta.tsv"
     },
     {
       "tensorName": "POS, PMI vocab_context=5k window=6",
       "tensorShape": [
         50, 5000
       ],
-      "tensorPath": "https://github.com/RuolinZheng08/ttic31190-natural-language-processing/blob/master/hw1_word_embs/pos-pmi-embs-vecs.tsv",
-      "metadataPath": "https://github.com/RuolinZheng08/ttic31190-natural-language-processing/blob/master/hw1_word_embs/pos-word-embs-meta.tsv"
+      "tensorPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-natural-language-processing/master/hw1_word_embs/pos-pmi-embs-vecs.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/RuolinZheng08/ttic31190-natural-language-processing/master/hw1_word_embs/pos-word-embs-meta.tsv"
     }
   ]
 }
