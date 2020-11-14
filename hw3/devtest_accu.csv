@@ -1,0 +1,11 @@
+w,emb,devtest_accu,feature,freeze
+0,random,0.7618021125242509,,
+1,random,0.8258245311489545,,
+0,random,0.7915499029963354,True,
+1,random,0.8473809010562621,True,
+0,pretrained,0.8288424229359775,,False
+1,pretrained,0.881224401810735,,False
+1,pretrained,0.8794998922181505,,True
+1,pretrained,0.8926492778616081,True,False
+2,random,0.8286268592369045,,
+2,pretrained,0.8937270963569734,True,False
