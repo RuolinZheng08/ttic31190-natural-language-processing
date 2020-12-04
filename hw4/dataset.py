@@ -3,6 +3,7 @@
 import re
 import numpy as np
 from collections import defaultdict
+
 import torch
 from torch.utils.data import DataLoader, Dataset
 
@@ -18,20 +19,21 @@ class Vocabulary:
 
     @staticmethod
     def tokenize(line):
-        # TODO: use spacy's tokenizer
-        return re.split('\W+', line.lower())
+        # TODO: try better tokenizers
+        return re.findall(r'\w+', line.lower())
 
     def build_vocab(self, lines):
+        # TODO: use GloVe
         frequencies = defaultdict(int)
         curr_idx = self.start_idx
         for line in lines:
             tokens = self.tokenize(line)
             for token in tokens:
                 frequencies[token] += 1
-            if frequencies[token] == self.freq_threshold:
-                self.idx_to_str.append(token)
-                self.str_to_idx[token] = curr_idx
-                curr_idx += 1
+                if frequencies[token] == self.freq_threshold:
+                    self.idx_to_str.append(token)
+                    self.str_to_idx[token] = curr_idx
+                    curr_idx += 1
 
     def numericalize(self, line):
         """
