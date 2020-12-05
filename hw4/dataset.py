@@ -1,18 +1,28 @@
-# Reference: https://github.com/aladdinpersson/Machine-Learning-Collection/blob/master/ML/Pytorch/Basics/custom_dataset_txt/loader_customtext.py
-
 import re
+import pickle
 import numpy as np
 from collections import defaultdict
 
 import torch
 from torch.utils.data import DataLoader, Dataset
 
-class Vocabulary:
-    def __init__(self, freq_threshold):
-        self.freq_threshold = freq_threshold
-        self.idx_to_str = ['<PAD>', '<s>', '</s>', '<UNK>']
-        self.str_to_idx = {s: idx for idx, s in enumerate(self.idx_to_str)}
+class GloveVocabulary:
+    def __init__(self, glove_vocab_path, glove_emb_path):
+        self.idx_to_str = ['<pad>', '<s>', '</s>'] # <unk> is in GloVe
         self.start_idx = len(self.idx_to_str) # length at which real tokens starts
+        # load glove into self.idx_to_str and self.str_to_idx
+        with open(glove_vocab_path, 'rb') as f:
+            glove_vocab = pickle.load(f)
+        with open(glove_emb_path, 'rb') as f:
+            glove_emb = pickle.load(f)
+        self.idx_to_str += glove_vocab
+        self.str_to_idx = {s: idx for idx, s in enumerate(self.idx_to_str)}
+
+        # instead of random vector, use the mean of all glove vectors for special tokens
+        mean_vec = glove_emb.mean(dim=0, keepdim=True)
+        self.embedding = torch.cat(
+            [mean_vec, mean_vec, mean_vec, glove_emb], dim=0
+        )
 
     def __len__(self):
         return len(self.idx_to_str)
@@ -21,19 +31,6 @@ class Vocabulary:
     def tokenize(line):
         # TODO: try better tokenizers
         return re.findall(r'\w+', line.lower())
-
-    def build_vocab(self, lines):
-        # TODO: use GloVe
-        frequencies = defaultdict(int)
-        curr_idx = self.start_idx
-        for line in lines:
-            tokens = self.tokenize(line)
-            for token in tokens:
-                frequencies[token] += 1
-                if frequencies[token] == self.freq_threshold:
-                    self.idx_to_str.append(token)
-                    self.str_to_idx[token] = curr_idx
-                    curr_idx += 1
 
     def numericalize(self, line):
         """
