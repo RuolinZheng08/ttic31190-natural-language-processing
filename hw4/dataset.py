@@ -7,6 +7,7 @@ from nltk.tokenize import word_tokenize
 
 import torch
 from torch.utils.data import DataLoader, Dataset
+from torch.nn.utils.rnn import pad_sequence
 
 UNK = '<unk>'
 PAD = '<pad>'
@@ -53,7 +54,7 @@ class GloveVocabulary:
             else:
                 ret.append(self.str_to_idx[UNK])
         ret.append(self.str_to_idx[EOS])
-        return ret
+        return torch.LongTensor(ret)
 
     def denumericalize(self, token_indices):
         """
@@ -71,14 +72,14 @@ class GloveVocabulary:
         return ' '.join(ret)
 
 class TrainDataset(Dataset):
-    def __init__(self, filename, glove_vocab_path, glove_emb_path, num_transforms=3):
+    def __init__(self, train_path, glove_vocab_path, glove_emb_path, num_transforms=3):
         """
         num_transforms: number of transforms to apply to the line to generate a negative sample
         """
         self.num_transforms = num_transforms
         self.first_column_lines = [] # lines in the first column
         self.second_column_lines = []
-        with open(filename, 'rt') as f:
+        with open(train_path, 'rt') as f:
             for line in f:
                 # do minimal amount of preprocessing here, lowercasing is done in vocab
                 first, second = line.split('\t')
@@ -91,9 +92,12 @@ class TrainDataset(Dataset):
         return len(self.first_column_lines)
 
     def generate_negative_example(self, numericalized_line):
+        """
+        numericalized_line: torch.LongTensor
+        """
         # randomly substitute in words after vocab.start_idx
         # TODO: insertion, deletion, permutation
-        ret = numericalized_line.copy()
+        ret = numericalized_line.detach().clone()
         # position in line to perturb
         token_indices = np.random.choice(range(len(numericalized_line)),
         self.num_transforms, replace=False)
@@ -119,3 +123,29 @@ class TrainDataset(Dataset):
         numericalized_negattive = self.generate_negative_example(numericalized_line)
 
         return numericalized_line, numericalized_positive, numericalized_negattive
+
+class PadCollate:
+    """
+    Pad lines in the same batch to the same length
+    """
+    def __init__(self, pad_idx):
+        """
+        pad_idx
+        """
+        self.pad_idx = pad_idx
+
+    def __call__(self, batch):
+        # use long tensor for embedding
+        lines = [item[0] for item in batch]
+        positives = [item[1] for item in batch]
+        negatives = [item[2] for item in batch]
+        lines = pad_sequence(lines, batch_first=False, padding_value=self.pad_idx)
+        positives = pad_sequence(positives, batch_first=False, padding_value=self.pad_idx)
+        negatives = pad_sequence(negatives, batch_first=False, padding_value=self.pad_idx)
+        return lines, positives, negatives
+
+def get_train_loader(train_path, glove_vocab_path, glove_emb_path):
+    dataset = TrainDataset(train_path, glove_vocab_path, glove_emb_path)
+    pad_idx = dataset.vocab.str_to_idx[PAD]
+    loader = DataLoader(dataset, batch_size=32, shuffle=False, pin_memory=True, collate_fn=PadCollate(pad_idx=pad_idx))
+    return loader
