@@ -14,6 +14,8 @@ PAD = '<pad>'
 SOS = '<s>' # start of sentence
 EOS = '</s>'
 
+BATCH_SIZE = 32
+
 class GloveVocabulary:
     def __init__(self, glove_vocab_path, glove_emb_path):
         self.idx_to_str = [PAD, SOS, EOS] # <unk> is in GloVe
@@ -147,5 +149,5 @@ class PadCollate:
 def get_train_loader(train_path, glove_vocab_path, glove_emb_path):
     dataset = TrainDataset(train_path, glove_vocab_path, glove_emb_path)
     pad_idx = dataset.vocab.str_to_idx[PAD]
-    loader = DataLoader(dataset, batch_size=32, shuffle=False, pin_memory=True, collate_fn=PadCollate(pad_idx=pad_idx))
+    loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True, collate_fn=PadCollate(pad_idx=pad_idx))
     return loader

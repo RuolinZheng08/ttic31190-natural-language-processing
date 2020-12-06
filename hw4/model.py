@@ -18,7 +18,7 @@ class RNNClassifier(nn.Module):
         rnn_input_dim = self.emb.weight.shape[1] # EMB_DIM
         rnn_output_dim = 128
         # TODO: bidirectional?
-        self.rnn = nn.GRU(rnn_input_dim, rnn_output_dim)
+        self.rnn = nn.GRU(rnn_input_dim, rnn_output_dim, batch_first=False)
 
         # pass the concatenation of two RNN outputs to fully connected layers
         fc_input_dim = rnn_output_dim * 2
@@ -29,16 +29,19 @@ class RNNClassifier(nn.Module):
     def forward(self, x1, x2):
         """
         x1: first sentence, x2: second setences
+        (seq_len, batch_size)
         """
+        x1 = self.emb(x1)
+        x2 = self.emb(x2)
         hidden = None
         for token in x1:
-            out1, hidden = self.rnn(token, hidden)
+            out1, hidden = self.rnn(token.unsqueeze(0), hidden)
         # TODO: is it better to pass hidden=hidden, hidden=output, or hidden=None
         hidden = out1
         for token in x2:
-            out2, hidden = self.rnn(token, hidden)
-        fc_input = torch.cat([out1, out2], dim=1)
+            out2, hidden = self.rnn(token.unsqueeze(0), hidden)
+        fc_input = torch.cat([out1, out2], dim=-1).squeeze()
         out = torch.tanh(self.fc1(fc_input))
-        # use sigmoid with BCELogitsLoss
+        # use sigmoid with BCELoss
         out = torch.sigmoid(self.fc2(out))
         return out
