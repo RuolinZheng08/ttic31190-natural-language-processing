@@ -14,7 +14,7 @@ PAD = '<pad>'
 SOS = '<s>' # start of sentence
 EOS = '</s>'
 
-BATCH_SIZE = 32
+BATCH_SIZE = 1000
 
 class GloveVocabulary:
     def __init__(self, glove_vocab_path, glove_emb_path):
@@ -151,3 +151,36 @@ def get_train_loader(train_path, glove_vocab_path, glove_emb_path):
     pad_idx = dataset.vocab.str_to_idx[PAD]
     loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True, collate_fn=PadCollate(pad_idx=pad_idx))
     return loader
+
+def load_dev_devtest(vocab, path):
+    """
+    calls vocab.numericalize
+    returns first_lines, second_lines, labels
+    """
+    first_lines = []
+    second_lines = []
+    labels = []
+    with open(path, 'rt') as f:
+        for line in f:
+            chunks = line.strip().split('\t')
+            first = vocab.numericalize(chunks[0])
+            second = vocab.numericalize(chunks[1])
+            label = int(chunks[2])
+            first_lines.append(first)
+            second_lines.append(second)
+            labels.append(label)
+    return first_lines, second_lines, labels
+
+def load_test(vocab, path):
+    """
+    skip id column, calls vocab.numericalize
+    """
+    first_lines, second_lines = [], []
+    with open(path, 'rt') as f:
+        for line in f:
+            chunks = line.strip().split('\t')
+            first = vocab.numericalize(chunks[1])
+            second = vocab.numericalize(chunks[2])
+            first_lines.append(first)
+            second_lines.append(second)
+    return first_lines, second_lines
