@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 EMB_DIM = 50
 
@@ -42,7 +43,7 @@ class RNNClassifier(nn.Module):
         for token in x2:
             out2, hidden = self.rnn(token.unsqueeze(0), hidden)
         fc_input = torch.cat([out1, out2], dim=-1).squeeze()
-        out = torch.ReLU(self.fc1(fc_input))
+        out = F.relu(self.fc1(fc_input))
         # use sigmoid with BCELoss
         out = torch.sigmoid(self.fc2(out))
         return out
