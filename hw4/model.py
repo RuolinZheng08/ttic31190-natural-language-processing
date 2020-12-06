@@ -37,7 +37,8 @@ class RNNClassifier(nn.Module):
         for token in x1:
             out1, hidden = self.rnn(token.unsqueeze(0), hidden)
         # TODO: is it better to pass hidden=hidden, hidden=output, or hidden=None
-        hidden = out1
+        # can do truncate or pad
+        hidden = None
         for token in x2:
             out2, hidden = self.rnn(token.unsqueeze(0), hidden)
         fc_input = torch.cat([out1, out2], dim=-1).squeeze()
